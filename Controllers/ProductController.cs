@@ -16,8 +16,9 @@ namespace AspNetCoreWebAPI.Controllers{
             this._productService = productService;
         }
 
-        // First Get Method
+        // First Get Method to list all products
         [HttpGet]
+        [Route("list")]
         public IActionResult List(){
             return Ok(this._productService.GetProducts());
         }
@@ -27,6 +28,18 @@ namespace AspNetCoreWebAPI.Controllers{
         public IActionResult Create(Product product){
             this._productService.AddProduct(product);
             return Ok();
+        }
+
+        [HttpPut]
+        [Route("list/{OldName}/{Name}")]
+        public IActionResult Edit([FromRoute] string OldName, string Name){
+            bool val = this._productService.EditProduct(OldName, Name);
+            if(val == true){
+                return Ok(_productService);
+            }else{
+                return NotFound();
+            }
+
         }
     }
 }

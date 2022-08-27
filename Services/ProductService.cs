@@ -19,5 +19,14 @@ namespace AspNetCoreWebAPI.Services{
         public void AddProduct(Product product){
             _productList.Add(product);
         }
+        public bool EditProduct(string OldName, string Name){
+            for(int i=0; i<_productList.Count; i++){
+                if(_productList[i].Name == OldName){
+                    _productList[i].Name = Name;
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
