@@ -28,5 +28,17 @@ namespace AspNetCoreWebAPI.Services{
             }
             return false;
         }
+
+        public bool DeleteProduct(string Name){
+            foreach (Product product in _productList)
+            {
+                if(product.Name == Name){
+                    product.Name = null;
+                    product.Price = Convert.ToDouble(null);
+                    return true;
+                }   
+            }
+            return false;
+        }
     }
 }
