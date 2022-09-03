@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AspNetCoreWebAPI.Models;
 
 namespace AspNetCoreWebAPI.Services{
@@ -30,13 +31,12 @@ namespace AspNetCoreWebAPI.Services{
         }
 
         public bool DeleteProduct(string Name){
-            foreach (Product product in _productList)
-            {
-                if(product.Name == Name){
-                    product.Name = null;
-                    product.Price = Convert.ToDouble(null);
-                    return true;
-                }   
+            Product findProduct = _productList.FirstOrDefault(
+                p => p.Name.Equals(Name)
+            );
+            if(findProduct != null ){
+                _productList.Remove(findProduct);
+                return true;
             }
             return false;
         }

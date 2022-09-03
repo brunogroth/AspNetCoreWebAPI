@@ -27,7 +27,7 @@ namespace AspNetCoreWebAPI.Controllers{
         [HttpPost]
         public IActionResult Create(Product product){
             this._productService.AddProduct(product);
-            return Ok();
+            return Ok("Product Sucessfully Created!");
         }
 
         [HttpPut]
@@ -38,7 +38,7 @@ namespace AspNetCoreWebAPI.Controllers{
 
             //if result from edited is true, return success. Else, return not found
             if(edited == true){
-                return Ok(_productService);
+                return Ok("Product successfully edited!");
             }else{
                 return NotFound();
             }
@@ -48,7 +48,7 @@ namespace AspNetCoreWebAPI.Controllers{
         public IActionResult Delete([FromRoute] string Name){
             bool deleted = this._productService.DeleteProduct(Name);
         if(deleted == true){
-                return Ok(_productService);
+                return Ok("Product successfully deleted!");
             }else{
                 return NotFound();
             }
